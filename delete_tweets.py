@@ -40,15 +40,17 @@ if timeline.status_code == 200:
     
     tweets = json.loads(timeline.text)
 
-    for t in tweets[min_tweets_to_keep:]:
-        tweet_id = t['id']
-        tweet_creation = datetime.strptime(t['created_at'], '%a %b %d %X %z %Y')
-        tweet_date = date(tweet_creation.year, tweet_creation.month, tweet_creation.day)
-        
-        if tweet_date < max_age and tweet_id not in protected_tweets:
+    if len(tweets) > min_tweets_to_keep:
 
-            delete_tweet_url = "https://api.twitter.com/1.1/statuses/destroy/%s.json" % (tweet_id,)
-        
-            requests.post(delete_tweet_url, auth=auth)
+        for t in tweets[min_tweets_to_keep:]:
+            tweet_id = t['id']
+            tweet_creation = datetime.strptime(t['created_at'], '%a %b %d %X %z %Y')
+            tweet_date = date(tweet_creation.year, tweet_creation.month, tweet_creation.day)
+            
+            if tweet_date < max_age and tweet_id not in protected_tweets:
 
-            sleep(rate_delay)
+                delete_tweet_url = "https://api.twitter.com/1.1/statuses/destroy/%s.json" % (tweet_id,)
+            
+                requests.post(delete_tweet_url, auth=auth)
+
+                sleep(rate_delay)
