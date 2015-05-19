@@ -9,7 +9,12 @@ Why? I'll let [others explain it better](http://fusion.net/story/50322/meet-the-
 it from everywhere for all time. Tweets are being archived by the Library
 of Congress, for example.
 
-Requrements
+**Also note:** This script only deletes from the 200 most recent tweets, so it
+won't clear your timeline all at once (at least not as-is). However, if you schedule
+it to run regularly, it will eventually work it's way back through your timeline,
+assuming you schedule it to run more frequently than you post 200 tweets.
+
+Requirements
 ===========
 
 In order to use this script, you need:
